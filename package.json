@@ -1,7 +1,7 @@
 {
   "name": "@graphile-contrib/pg-non-null",
   "version": "1.0.0",
-  "description": "Allows non-null injections",
+  "description": "A PostGraphile plugin helping you handle non nullable fields.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
