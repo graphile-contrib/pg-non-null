@@ -8,6 +8,8 @@ within this repository:
 - `PgNonNullRelationsPlugin`<br>
   _This plugin makes sure that fields behind foreign keys which are flagged as `NOT NULL` are also non nullable in the resulting GraphQL schema._
 
+⚠️ Please be wary and use with caution, as these plugins influence only the **output** types! By no means do any of the plugins guarantee that Postgres will follow your manual non null overrides! ⚠️
+
 ## Installation:
 
 ```bash
@@ -127,18 +129,27 @@ CREATE TABLE public.user (
   last_name  text NOT NULL
 );
 
+CREATE TYPE public.article_state AS (
+  is_public boolean,
+  likes     int
+);
+
+COMMENT ON TYPE public.article_state IS $$
+@nonNull is_public
+@nonNull likes
+$$;
+
 CREATE TABLE public.article (
   id serial PRIMARY KEY,
 
-  -- `userByAuthorId` should not be null because the foreign key is not null
+  -- `userByAuthorId` link should not be null because the foreign key is not null
   author_id serial NOT NULL REFERENCES public.user(id),
+
+  "state" public.article_state NOT NULL,
 
   title   text NOT NULL,
   content text
 );
-
--- `@nonNull [field]` tag indicates that the child fields defined in the `[field]` are not null
-COMMENT ON TABLE public.article IS '@nonNull content';
 
 CREATE FUNCTION public.user_full_name("user" public.user) RETURNS text AS
 $$
@@ -146,7 +157,6 @@ $$
 $$
 LANGUAGE SQL STABLE;
 
--- `@nonNull` tag indicates that the field on which the tag exists is not null
 COMMENT ON FUNCTION public.user_full_name IS '@nonNull';
 ```
 
@@ -161,12 +171,18 @@ type User {
   fullName: String! # NonNull derived by the `PgNonNullSmartCommentPlugin`
 }
 
-type Article {
-  id: UUID!
-  authorId: UUID!
-  title: String!
+type ArticleState {
+  isPublic Boolean! # NonNull derived by the `PgNonNullSmartCommentPlugin`
+  likes Int! # NonNull derived by the `PgNonNullSmartCommentPlugin`
+}
 
-  content: String! # NonNull derived by the `PgNonNullSmartCommentPlugin`
+type Article {
+  id: Int!
+  authorId: Int!
+  state: ArticleState!
+  title: String!
+  content: String
+
   userByAuthorId: User! # NonNull derived by the `PgNonNullRelationsPlugin`
 }
 ```
