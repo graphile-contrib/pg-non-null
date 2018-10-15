@@ -1,0 +1,33 @@
+{
+  "name": "@graphile-contrib/pg-non-null",
+  "version": "1.0.0",
+  "description": "Allows non-null injections",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphile-contrib/pg-non-null.git"
+  },
+  "keywords": [
+    "graphile",
+    "postgraphile",
+    "plugin",
+    "pg",
+    "non-null",
+    "relations",
+    "smart-comment"
+  ],
+  "author": "Denis Badurina <badurinadenis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphile-contrib/pg-non-null/issues"
+  },
+  "homepage": "https://github.com/graphile-contrib/pg-non-null#readme",
+  "files": [
+    "index.js",
+    "relations.js",
+    "smart-comment.js"
+  ]
+}
