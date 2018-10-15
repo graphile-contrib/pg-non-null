@@ -70,7 +70,7 @@ app.use(
     CREATE TABLE private.user (
       id         serial PRIMARY KEY,
       first_name text NOT NULL,
-      last_name  text,
+      last_name  text
     );
     COMMENT ON TABLE private.user IS '@nonNull last_name';
     ```
@@ -104,7 +104,7 @@ app.use(
     CREATE TABLE public.user (
       id         serial PRIMARY KEY,
       first_name text NOT NULL,
-      last_name  text,
+      last_name  text
     );
     COMMENT ON COLUMN public.user.last_name IS '@nonNull';
     ```
