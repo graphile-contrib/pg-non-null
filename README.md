@@ -72,7 +72,7 @@ app.use(
       first_name text NOT NULL,
       last_name  text,
     );
-    COMMENT ON TABLE private.user IS E'@nonNull last_name';
+    COMMENT ON TABLE private.user IS '@nonNull last_name';
     ```
 
     ```sql
