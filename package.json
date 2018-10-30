@@ -25,5 +25,10 @@
     "url": "https://github.com/graphile-contrib/pg-non-null/issues"
   },
   "homepage": "https://github.com/graphile-contrib/pg-non-null#readme",
-  "files": ["index.js", "relations.js", "smart-comment.js", "src"]
+  "files": [
+    "index.js",
+    "relations.js",
+    "smart-comment.js",
+    "src"
+  ]
 }
