@@ -23,7 +23,7 @@ module.exports = function PgNonNullRelationsPlugin(builder) {
       if (relationIsNotNull) {
         return {
           ...field,
-          type: new build.graphql.GraphQLNonNull(field.type),
+          type: new build.graphql.GraphQLNonNull(build.graphql.getNullableType(field.type)),
         };
       }
     }

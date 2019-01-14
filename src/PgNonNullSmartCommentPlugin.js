@@ -24,7 +24,7 @@ module.exports = function PgNonNullSmartCommentPlugin(builder) {
     if (fieldNonNull === true) {
       return {
         ...field,
-        type: new build.graphql.GraphQLNonNull(field.type),
+        type: new build.graphql.GraphQLNonNull(build.graphql.getNullableType(field.type)),
       };
     }
 
@@ -47,7 +47,7 @@ module.exports = function PgNonNullSmartCommentPlugin(builder) {
     ) {
       return {
         ...field,
-        type: new build.graphql.GraphQLNonNull(field.type),
+        type: new build.graphql.GraphQLNonNull(build.graphql.getNullableType(field.type)),
       };
     }
 
@@ -65,7 +65,7 @@ module.exports = function PgNonNullSmartCommentPlugin(builder) {
       ) {
         return {
           ...field,
-          type: new build.graphql.GraphQLNonNull(field.type),
+          type: new build.graphql.GraphQLNonNull(build.graphql.getNullableType(field.type)),
         };
       }
     }
