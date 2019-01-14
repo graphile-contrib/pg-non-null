@@ -15,7 +15,10 @@ module.exports = function PgNonNullRelationsPlugin(builder) {
       const linkedAttributeNums = pgFieldIntrospection.keyAttributeNums;
       const relationIsNotNull = pgFieldIntrospection.class.attributes
         .filter((attr) => linkedAttributeNums.indexOf(attr.num) >= 0)
-        .every((attr) => attr.isNotNull || attr.type.domainIsNotNull);
+        .every(
+          (attr) =>
+            attr.isNotNull || attr.type.domainIsNotNull || attr.tags.notNull || attr.tags.nonNull,
+        );
 
       if (relationIsNotNull) {
         return {
