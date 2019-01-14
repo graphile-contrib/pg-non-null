@@ -10,8 +10,8 @@
 
 module.exports = function PgNonNullSmartCommentPlugin(builder) {
   builder.hook('GraphQLObjectType:fields:field', (field, build, context) => {
-    const { pgFieldIntrospection, pgIntrospection } = context.scope;
-    if (!pgFieldIntrospection || !pgIntrospection) {
+    const { pgFieldIntrospection } = context.scope;
+    if (!pgFieldIntrospection) {
       return field;
     }
 
@@ -26,6 +26,11 @@ module.exports = function PgNonNullSmartCommentPlugin(builder) {
         ...field,
         type: new build.graphql.GraphQLNonNull(field.type),
       };
+    }
+
+    const { pgIntrospection } = context.scope;
+    if (!pgIntrospection) {
+      return field;
     }
 
     const {
